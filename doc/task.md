@@ -1,7 +1,9 @@
 # Docker Compose Setup for Reto Relampago
 
+- [x] Phase 1: Database Schema (Users, Roles, Auth) <!-- id: 6 -->
 - [x] Explore project structure <!-- id: 0 -->
 - [x] Create implementation plan for `docker-compose.yml` <!-- id: 1 -->
-- [x] Phase 1: Database Schema (Users, Roles, Auth) <!-- id: 6 -->
 - [x] Get user approval for the plan <!-- id: 2 -->
 - [x] Create `docker-compose.yml` <!-- id: 3 -->
+- [x] Initialize Git repository and push changes <!-- id: 5 -->
+- [x] Verify Docker execution <!-- id: 7 -->
