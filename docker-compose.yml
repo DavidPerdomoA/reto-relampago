@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: node:20-alpine
+    container_name: reto-frontend
+    working_dir: /app
+    volumes:
+      - ./reto-frontend:/app
+    ports:
+      - "4200:4200"
+    command: npm start -- --host 0.0.0.0
+    networks:
+      - reto-network
+
+  backend:
+    image: bitnami/laravel:latest
+    container_name: reto-backend
+    volumes:
+      - ./reto-backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=app_db
+      - DB_USERNAME=user
+      - DB_PASSWORD=password
+    depends_on:
+      - db
+    networks:
+      - reto-network
+
+  db:
+    image: postgres:15
+    container_name: reto-db
+    environment:
+      - POSTGRES_DB=app_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - reto-network
+
+  microservices:
+    image: python:3.11-slim
+    container_name: reto-microservices
+    working_dir: /app
+    volumes:
+      - ./microservices:/app
+    # Placeholder command, will fail if main.py doesn't exist, but keeps container config ready
+    command: sh -c "while true; do sleep 3600; done" 
+    networks:
+      - reto-network
+
+networks:
+  reto-network:
+    driver: bridge
+
+volumes:
+  db_data:
