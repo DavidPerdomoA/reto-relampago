@@ -18,6 +18,8 @@ Create a `docker-compose.yml` file in the root of the project (`c:\Proyectos\ret
 
 ### Root Directory
 #### [MODIFY] [docker-compose.yml](file:///c:/Proyectos/reto%20relampago/docker-compose.yml)
+- **Backend Service**:
+  - **[Fix]** Add `user: root` to bypass `chown` permission errors on Windows Docker volumes for the Bitnami image.
 - **Frontend Service**:
   - **[Fix]** Add anonymous volume `/app/node_modules` to prevent host Windows modules from breaking the Linux container.
   - **[Fix]** Update initialization command to `sh -c "npm install && npm start -- --host 0.0.0.0"` to ensure Linux dependencies are installed.

@@ -17,6 +17,7 @@ services:
   backend:
     image: bitnami/laravel:latest
     container_name: reto-backend
+    user: root
     volumes:
       - ./reto-backend:/app
     ports:
