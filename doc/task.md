@@ -10,4 +10,5 @@
     - [x] Debug Frontend container failure <!-- id: 8 -->
     - [x] Apply fix for Frontend `node_modules` <!-- id: 9 -->
     - [x] Debug Backend container failure <!-- id: 10 -->
-    - [x] Apply fix for Backend permissions <!-- id: 11 -->
+    - [x] Apply fix for Backend permissions (Bitnami image failed) <!-- id: 11 -->
+    - [x] Refactor Backend to use custom Dockerfile <!-- id: 12 -->
