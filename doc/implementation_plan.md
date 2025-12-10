@@ -17,30 +17,12 @@ Create a `docker-compose.yml` file in the root of the project (`c:\Proyectos\ret
 ## Proposed Changes
 
 ### Root Directory
-#### [NEW] [docker-compose.yml](file:///c:/Proyectos/reto%20relampago/docker-compose.yml)
+#### [MODIFY] [docker-compose.yml](file:///c:/Proyectos/reto%20relampago/docker-compose.yml)
 - **Frontend Service**:
-  - Image: `node:20-alpine`
-  - Working Dir: `/app`
-  - Volumes: `./reto-frontend:/app`
-  - Command: `npm start -- --host 0.0.0.0`
-  - Ports: `4200:4200`
-- **Backend Service (Laravel)**:
-  - Image: `bitnami/laravel:latest`
-  - Volumes: `./reto-backend:/app`
-  - Ports: `8000:8000`
-  - Depends on: `db`
-  - Environment variables for DB connection.
-- **Database Service (Postgres)**:
-  - Image: `postgres:15`
-  - Environment: `POSTGRES_DB=app_db`, `POSTGRES_USER=user`, `POSTGRES_PASSWORD=password`
-  - Ports: `5432:5432`
-  - Volumes: `db_data:/var/lib/postgresql/data`
-- **Microservices Service (Python)**:
-  - Image: `python:3.11-slim`
-  - Working Dir: `/app`
-  - Volumes: `./microservices:/app`
-  - Command: `python main.py` (placeholder)
+  - **[Fix]** Add anonymous volume `/app/node_modules` to prevent host Windows modules from breaking the Linux container.
+  - **[Fix]** Update initialization command to `sh -c "npm install && npm start -- --host 0.0.0.0"` to ensure Linux dependencies are installed.
 
 ## Verification Plan
 ### Manual Verification
 1.  **Execution**: User can run `docker-compose up` to verify containers start.
+2.  **Access**: Verify `localhost:4200` is accessible.
