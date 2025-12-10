@@ -28,16 +28,10 @@ Create a `docker-compose.yml` file in the root of the project (`c:\Proyectos\ret
 
 **Better Approach**: Create a simple `Dockerfile` for the backend.
 
-#### [NEW] [reto-backend/Dockerfile](file:///c:/Proyectos/reto%20relampago/reto-backend/Dockerfile)
+#### [MODIFY] [reto-backend/Dockerfile](file:///c:/Proyectos/reto%20relampago/reto-backend/Dockerfile)
+- **[Update]** Change `CMD` to execute migrations and seeders before starting the server.
 ```dockerfile
-FROM php:8.2-apache
-RUN apt-get update && apt-get install -y libpq-dev zip unzip \
-    && docker-php-ext-install pdo pdo_pgsql
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-WORKDIR /app
-COPY . /app
-RUN chown -R www-data:www-data /app
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD sh -c "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000"
 ```
 
 #### [MODIFY] [docker-compose.yml](file:///c:/Proyectos/reto%20relampago/docker-compose.yml)

@@ -21,4 +21,4 @@ COPY . /app
 RUN chown -R www-data:www-data /app
 
 # Expose port 8000 and start php artisan serve
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD sh -c "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000"
